@@ -53,11 +53,7 @@ userSchema.methods.completeSave = async function (data) {
     try {
         const currUserBasedOnRole = {
             "EndUser": EndUser,
-            "Staff": Staff,
-            "Ticketer": Ticketer,
-            "BoardDirector": BoardDirector,
-            "Founder": Founder,
-            "SuperAdmin": SuperAdmin,
+            "Admin": Admin
         }
         data.user = this._id
         if (data.role == "EndUser") { data.isActive = true }

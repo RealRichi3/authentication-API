@@ -3,8 +3,7 @@ const router = express.Router()
 
 const { signup, verifyEmail, login, passwordReset, confirmResetAndChangePassword } = require('../controllers/authController')
 
-router.
-    post('/signup', signup).
+router.post('/signup', signup).
     post('/verify', verifyEmail).
     post('/login', login)
 

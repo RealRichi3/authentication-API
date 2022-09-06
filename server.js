@@ -9,10 +9,12 @@ const {errorHandler} = require('./middlewares/errorHandler')
 
 const config = process.env
 const app = express()
+app.use(express.json())
+
 
 app.use(morgan('dev'))
 
-// Access-Control-Allow-Origin
+// Access-Control-Allowed-Origins
 app.use((req, res, next) => {
     const allowed_origins = []
     const origin = req.header.origin;
@@ -27,13 +29,16 @@ app.use((req, res, next) => {
     next()
 })
 
-
-// Routes 
 const authRoute = require('./routes/authRoutes')
 
 
+// Auth 
 app.use('/api/auth', authRoute)
+
+
+
 app.use(errorHandler)
+
 
 async function start(){
     try {

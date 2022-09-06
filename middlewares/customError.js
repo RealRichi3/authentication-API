@@ -22,5 +22,6 @@ class BadRequestError extends CustomAPIError {
 
 module.exports = {
     UnauthorizedError,
-    BadRequestError
+    BadRequestError,
+    CustomAPIError
 }
