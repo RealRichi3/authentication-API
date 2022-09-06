@@ -19,12 +19,6 @@ const { sendMail } = require("./utils/mailer"),
     { EmailMsg } = require('./utils/messageTemplates')
 
 // Constants
-const users = {
-    "EndUser": EndUser,
-    "BoatOperator": BoatOperator,
-    "Staff": Staff,
-    "Ticketer": Ticketer,
-};
 const config = process.env
 
 
