@@ -10,6 +10,7 @@ async function hashString(string_to_hash) {
         const response = await bcrypt.hash(string_to_hash, salt_rounds)
         if (response) { hashed_string = response }
         else { throw "An Error occured" }
+        return hashed_string
     } catch (error) {
         console.log(error)
         return error

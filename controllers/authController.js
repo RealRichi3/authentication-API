@@ -137,7 +137,7 @@ const passwordReset = asyncWrapper(async (req, res, next) => {
     const reset_token = Math.floor(100000 + Math.random() * 900000).toString(),
         reset_access_token = await currUser.createResetToken(reset_token);
 
-    await sendMail(new EmailMsg(email, currUser.firstname, reset_token).passwordReset())
+    await sendMail(new EmailMsg(email, currUser.firstname, reset_token).userPasswordResetVerification())
     return res.status(statusCode.CREATED).send({ message: "Password reset code sent you user email", token: reset_access_token })
 })
 
@@ -159,6 +159,7 @@ const confirmResetAndChangePassword = asyncWrapper(async (req, res, next) => {
     if (reset_token != currUserReset.token) { throw new BadRequestError(' Reset token is invalid ') }
 
     const hash = await hashString(password)
+    console.log(hash)
     
     const password_ = await Password.findOneAndUpdate({ user: payload._id }, { password: hash }, { new: true }).populate('user')
     console.log(password_)

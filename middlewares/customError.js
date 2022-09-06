@@ -1,27 +1,30 @@
 
-class CustomAPIError extends Error{
-    constructor (message) {
+class CustomAPIError extends Error {
+    constructor(message){
         super(message)
-    }
-}
-
-class UnauthorizedError extends CustomAPIError {
-    constructor (message){
-        super(message)
-        this.statuscode = 401        
     }
 }
 
 class BadRequestError extends CustomAPIError {
-    constructor (message) {
+    constructor (message){
         super(message)
-        this.statuscode = 400
+        this.statusCode = 400
     }
 }
 
+class UnauthorizedError extends CustomAPIError {
+    constructor (message) {
+        super(message) 
+        this.statusCode = 401
+    }
+}
+const createCustomError = (msg, statusCode) => {
+    return new CustomAPIError(msg, statusCode)
+}
 
 module.exports = {
-    UnauthorizedError,
+    createCustomError, 
+    CustomAPIError,
     BadRequestError,
-    CustomAPIError
+    UnauthorizedError,
 }
