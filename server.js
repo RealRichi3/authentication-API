@@ -16,12 +16,13 @@ app.use(morgan('dev'))
 
 // Access-Control-Allowed-Origins
 app.use((req, res, next) => {
-    const allowed_origins = []
+    const allowed_origins = ["http://127.0.0.1:5500"]
     const origin = req.header.origin;
-
+    console.log(origin)
     if (allowed_origins.includes(origin)) {
-        res.setHeader('Acces-Control-Allow-Origin', origin);
+        res.setHeader('Access-Control-Allow-Origin', "*");
     }
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, OPTIONS, POST');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.header('Access-Control-Allow-Credentials', true);

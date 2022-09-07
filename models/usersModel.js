@@ -18,17 +18,13 @@ const endUser = new Schema({
     firstname: { type: String, required: [true, "Firstname is required"] },
     lastname: { type: String, required: [true, "Lastname is required"] },
     email: { type: String, unique: true, required: [true, "email is required"] },
-    phonenumber: { type: String, required: [true, "phone number is required"] },
-    address: { type: String },
-    role: { type: String, required: [true, "role is required"], default: "EndUser" },
+    role: { type: String, default: "EndUser" },
 }, options, { timestamp: true })
 
 const admin = new Schema({
     firstname: { type: String, required: [true, "Firstname is required"] },
     lastname: { type: String, required: [true, "Lastname is required"] },
     email: { type: String, unique: true, required: [true, "email is required"] },
-    phonenumber: { type: String, required: [true, "phone number is required"] },
-    address: { type: String },
     role: { type: String, required: [true, "role is required"], default: "admin" }
 }, options, { timestamp: true });
 
@@ -41,7 +37,6 @@ const userSchema = new Schema({
     firstname: { type: String, required: [true, "Firstname is required"] },
     lastname: { type: String, required: [true, "Lastname is required"] },
     email: { type: String, unique: true, required: [true, "email is required"] },
-    phonenumber: { type: String, required: [true, "phone number is required"] },
     address: { type: String },
     role: { type: String, required: [true, "role is required"] }
 }, { toObject: { virtuals: true } }, { timestamp: true })

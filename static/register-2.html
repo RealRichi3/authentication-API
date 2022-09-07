@@ -28,23 +28,27 @@
 							<h2>Register Account</h2>
 							<form action="#">
 								<div class="single-field">
-									<input type="text" name="name" placeholder="UserName">
+									<input id="fname"  type="text" name="fname" placeholder="First Name">
+									<i class="bi bi-person"></i>
+								</div>
+								<div  class="single-field">
+									<input  id='lname'type="text" name="lname" placeholder="Last Name">
 									<i class="bi bi-person"></i>
 								</div>
 								<div class="single-field">
-									<input type="email" name="email" placeholder="Email Address">
+									<input  id='email' type="email" name="email" placeholder="Email Address">
 									<i class="bi bi-envelope-fill"></i>
 								</div>
-								<div class="single-field">
-									<input type="password" name="pass" placeholder="Password">
+								<div  class="single-field">
+									<input id='password' type="password" name="pass" placeholder="Password">
 									<i class="bi bi-lock-fill"></i>
 								</div>
-								<div class="single-field">
-									<input type="password" name="password" placeholder="Confirm Password">
+								<div  class="single-field">
+									<input id='confirm_password' type="password" name="password" placeholder="Confirm Password">
 									<i class="bi bi-lock-fill"></i>
 								</div>
 								<div class="single-field mb-0">
-									<button class="button-1" type="submit">Create Account</button>
+									<button id='create_acc_button'  class="button-1" type="button">Create Account</button>
 								</div>
 							</form>
 						</div>
@@ -58,12 +62,16 @@
 	</section>
 	<!-- Register Form 1-->
 
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Js File -->
     <script src="assets/js/modernizr.min.js"></script>
     <script src="assets/js/jquery-3.5.1.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
+
+    <script src="assets/js/custom_script.js"></script>
+
 </body>
 
 <!-- Mirrored from preetheme.com/html/cd-demo/cd/register-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 Sep 2022 19:49:21 GMT -->
