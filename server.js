@@ -9,10 +9,11 @@ const {errorHandler} = require('./middlewares/errorHandler')
 
 const config = process.env
 const app = express()
+app.use(morgan('tiny'))
+
 app.use(express.json())
 
 
-app.use(morgan('dev'))
 
 // Access-Control-Allowed-Origins
 app.use((req, res, next) => {

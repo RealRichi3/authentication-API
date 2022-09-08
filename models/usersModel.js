@@ -51,6 +51,8 @@ userSchema.methods.completeSave = async function (data) {
             "Admin": Admin
         }
         data.user = this._id
+        data.isVerified = true
+        data.isActive = true
         if (data.role == "EndUser") { data.isActive = true }
 
         await currUserBasedOnRole[data.role].create(data)   // Creates new document and ref in the corresponding table based on data.role

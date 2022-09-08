@@ -99,9 +99,12 @@ const login = asyncWrapper(async (req, res, next) => {
     let jwt_token;
 
     const { email, password } = req.body;
-    if (!email || !password) { throw new BadRequestError("Missing required parameter: Validation failed") }
+    console.log(req.body)
+    if (!email || !password) { 
+        throw new BadRequestError("Missing required parameter: Validation failed") }
 
     const currUser = await User.findOne({ email }).populate('password status');
+    console.log(currUser)
 
     if (!currUser) { throw new BadRequestError('Invalid login credentials') }
     if (!currUser.status.isVerified) {
