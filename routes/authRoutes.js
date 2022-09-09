@@ -9,7 +9,7 @@ router.post('/signup', signup).
 
 router.
     post('/password/reset', passwordReset).
-    put('/password/confirmtoken', confirmResetAndChangePassword)
+    post('/password/confirmtoken', confirmResetAndChangePassword)
 
 // Post login routes should require user.isActive
 

@@ -96,6 +96,7 @@ const verifyEmail = asyncWrapper(async (req, res, next) => {
 
 
 const login = asyncWrapper(async (req, res, next) => {
+    console.log(req.body)
     let jwt_token;
 
     const { email, password } = req.body;
@@ -140,20 +141,23 @@ const passwordReset = asyncWrapper(async (req, res, next) => {
 
 
 const confirmResetAndChangePassword = asyncWrapper(async (req, res, next) => {
+    console.log(req.body)
     const { reset_token, password } = req.body
     if (!reset_token || !password) { throw new BadRequestError("Missing required parameter: Validation failed") }
 
     const authHeader = req.headers.authorization
     if (!authHeader || !authHeader.startsWith('Bearer')) { throw new UnauthorizedError('Authentication invalid') }
 
+    console.log(authHeader)
     const jwtToken = authHeader.split(' ')[1]
     const payload = decodeJWT(jwtToken)
     console.log(payload)
     const currUserReset = await ResetToken.findOne({ user: payload._id })
+    console.log(currUserReset)
 
     if (!currUserReset) { throw BadRequestError(' Reset token is invalid') }
-    if (reset_token != payload.reset_token) { throw new BadRequestError(' Reset token is invalid ') }
-    if (reset_token != currUserReset.token) { throw new BadRequestError(' Reset token is invalid ') }
+    if (reset_token != payload.reset_token) { console.log('first'); throw new BadRequestError(' Reset token is invalid ') }
+    if (reset_token != currUserReset.token) { console.log('second'); throw new BadRequestError(' Reset token is invalid ') }
 
     const hash = await hashString(password)
     console.log(hash)
