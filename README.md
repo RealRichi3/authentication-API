@@ -17,6 +17,7 @@ It API includes;
 - Password Reset
 - User Account verification
 - Account activation and deactivation by admin
+- Unit tests for API routes, run `npm test`
 
 
 ## Setup
