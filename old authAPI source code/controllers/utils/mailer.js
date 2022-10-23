@@ -1,6 +1,3 @@
-const asyncWrapper = require('../../middlewares/asyncWrapper');
-const { BadRequestError } = require('../../middlewares/customError');
-
 require('dotenv').config();
 
 const nodemailer = require("nodemailer"),
@@ -29,8 +26,8 @@ function mailOptions(email_address, subject, message) {
     };
 }
 
-const sendMail = async (mail_data) => {
-    return new Promise(async (resolve, reject) => {
+function sendMail(mail_data) {
+    return new Promise((resolve, reject) => {
         try {
             let user_mail_option = mailOptions(
                 mail_data.email,
@@ -39,20 +36,15 @@ const sendMail = async (mail_data) => {
             );
 
             // Send token and reset link to user's Email address
-             transporter.sendMail(user_mail_option, (error, info) => {
-                if (error) {
-                    // console.log(error)
-                    resolve(error)
-                } else { resolve(info) }
+            transporter.sendMail(user_mail_option, (error, info) => {
+                if (error) { throw error } else { resolve(info) }
             });
-
         } catch (error) {
-            // console.log(error)
+            console.log(error);
+            reject(error)
         }
     })
-
-}
-
+};
 
 
 module.exports = {

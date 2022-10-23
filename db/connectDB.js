@@ -1,10 +1,17 @@
-const {asyncWrapper} = require('../middlewares/asyncWrapper')
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const connectToDB = async (db_URI) => {
-    await mongoose.connect(db_URI)
-    const db = mongoose.connection
-    console.log(`Connection to ${db.name} database successful ...`)
+async function connectDatabase(url) {
+    return new Promise((resolve, reject) => {
+        mongoose.connect(url)
+        .then((response) => {
+            console.log(`Connection to ${mongoose.connection.name} database Successful!`);
+            resolve('Successful')
+        }, (error) => {
+            console.log(error)
+            reject(error)
+        });
+
+    })
 }
 
-module.exports = {connectToDB}
+module.exports = connectDatabase

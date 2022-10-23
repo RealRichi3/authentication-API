@@ -1,26 +1,66 @@
 {
-  "name": "authenctication_api",
+  "name": "auth_api",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "API for user Authentication",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test mocha --timeout 10000",
+    "dev": "cross-env NODE_ENV=dev nodemon server.js",
     "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BoayantHQ/auth_API.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BoayantHQ/auth_API/issues"
+  },
+  "homepage": "https://github.com/BoayantHQ/auth_API#readme",
   "dependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/node": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "@google-cloud/local-auth": "^2.1.0",
+    "@nuintun/qrcode": "^3.3.0",
+    "@zxing/library": "^0.19.1",
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
-    "dotenv": "^16.0.2",
+    "chai-http": "^4.3.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "date-fns": "^2.29.3",
+    "dateformat": "^5.0.3",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "google-auth-library": "^8.5.1",
+    "googleapis": "^105.0.0",
+    "jimp": "^0.16.2",
     "jsonwebtoken": "^8.5.1",
+    "jsqr": "^1.4.0",
     "lodash": "^4.17.21",
-    "mongoose": "^6.5.4",
+    "mongoose": "^6.5.0",
     "morgan": "^1.10.0",
-    "nodemailer": "^6.7.8",
+    "nodemailer": "^6.7.5",
     "nodemon": "^2.0.19",
-    "random-token": "^0.0.8"
+    "pngjs": "^6.0.0",
+    "qrcode": "^1.5.1",
+    "qrcode-reader": "^1.0.4",
+    "random-token": "^0.0.8",
+    "rotating-file-stream": "^3.0.4",
+    "run-rs": "^0.7.7",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "cross-env": "^7.0.3",
+    "mocha": "^10.0.0",
+    "supertest": "^6.2.4"
   }
 }

@@ -1,4 +1,6 @@
-const asyncWrapper = (fn) => {
+
+
+const asyncWrapper = fn => {
     return async (req, res, next) => {
         try {
             return await fn(req, res, next)
@@ -8,5 +10,6 @@ const asyncWrapper = (fn) => {
     }
 }
 
-
-module.exports = asyncWrapper
+module.exports = {
+    asyncWrapper
+}

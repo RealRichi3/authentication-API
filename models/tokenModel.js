@@ -1,45 +1,54 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const randomToken = require('random-token')
+const config = process.env;
 
-const resetToken = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        refPath: 'role'
+const token = new Schema(
+    {
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        role: {
+            type: String,
+            required: true,
+            enum: [
+                'SuperAdmin',
+                'EndUser'
+            ]
+        },
+        password_reset: { type: String, default: null },
+        verification: {
+            type: String,
+            default: `${Math.floor(100000 + Math.random() * 900000)}`
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        }
     },
-    role: {
-        type: String,
-        required: true,
-        enum: ["Admin", "EndUser"]
-    },
-    token: { type: String, default: randomToken(16) },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-}, { timestamp: true })
+    { timestamp: true }
+);
 
-const verificationToken = new Schema({
-    role: {
-        type: String,
-        required: true,
-        enum: ["Admin", "EndUser"]
+const blacklisted_tokens = new Schema(
+    {
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+        tokens: [{ type: String }]
     },
-    user: {
-        type: mongoose.Types.ObjectId,
-        refPath: 'role'
-    },
-    token: { type: String, default: `${Math.floor(100000 + Math.random() * 900000)}` },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-}, { timestamp: true })
-
-const ResetToken = mongoose.model("ResetToken", resetToken)
-const VerificationToken = mongoose.model('VerificationToken', verificationToken)
+    {
+        createdAt: {
+            type: Date,
+            expires: config.JWT_REFRESH_EXP || '5d',
+            default: Date.now
+        }
+    }
+);
+const Token = mongoose.model('Token', token),
+    BlacklistedTokens = mongoose.model('BlacklistedTokens', blacklisted_tokens)
 
 module.exports = {
-    ResetToken,
-    VerificationToken
-}
+    Token,
+    BlacklistedTokens
+};

@@ -1,29 +1,32 @@
-const bcrypt = require('bcrypt')
-
+const bcrypt = require('bcrypt');
 
 // Accepts password and returns hashed password
-async function hashString(string_to_hash) {
+async function hashPassword(password) {
     try {
-        const salt_rounds = 10;
-        let hashed_string;
+        return new Promise(async (resolve, reject) => {
+            let saltRounds = 10
+            await bcrypt.hash(password, saltRounds)
+                .then((response) => {
+                    if (response) { password = response }
+                    else { throw "An error occured" }
+                }, (error) => { reject(error) })
+            resolve(password)
+        })
 
-        const response = await bcrypt.hash(string_to_hash, salt_rounds)
-        if (response) { hashed_string = response }
-        else { throw "An Error occured" }
-        return hashed_string
     } catch (error) {
         console.log(error)
         return error
     }
+
 }
 
 // Checks if password matches saved hash value
-async function confirmHash(string_to_confirm, hash, _res = null) {
-    return await bcrypt.compare(string_to_confirm, hash)
+async function checkHash(password, hash, _res = null) {
+    return await bcrypt.compare(password, hash)
         .then(response => { return response })
 }
 
 module.exports = {
-    hashString,
-    confirmHash
+    hashPassword,
+    checkHash,
 };

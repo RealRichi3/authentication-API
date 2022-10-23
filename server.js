@@ -1,64 +1,20 @@
-const express = require('express')
-const morgan = require('morgan')
-require('dotenv').config()
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 
-const {asyncWrapper} = require("./middlewares/asyncWrapper")
-const {connectToDB} = require('./db/connectDB')
-const {errorHandler} = require('./middlewares/errorHandler')
+const app = require('./app')
+const PORT = process.env.PORT || 5527
+const connectDatabase = require("./db/connectDB");
 
 
-const config = process.env
-const app = express()
-app.use(morgan('tiny'))
-
-app.use(express.json())
-
-
-
-// Access-Control-Allowed-Origins
-app.use((req, res, next) => {
-    const allowed_origins = ["http://127.0.0.1:5500"]
-    const origin = req.header.origin;
-    console.log(origin)
-    if (allowed_origins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', "*");
-    }
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, OPTIONS, POST');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', true);
-
-    next()
-})
-
-const authRoute = require('./routes/authRoutes')
-
-
-// Auth 
-app.use('/api/auth', authRoute)
-
-
-
-app.use(errorHandler)
-
-
-async function start(){
+async function start() {
     try {
-        // connerct to database
-        await connectToDB(config.MONGO_URI)
+        await connectDatabase(process.env.MONGO_URI);
 
-        // express server init
-        const PORT = config.PORT || 3343
-        app.listen(PORT, ()=> {
-            console.log(`Server currently listening on port ${PORT}`)
-        })
+        app.listen(PORT, function () {
+            console.log(`Server is running on port ${PORT}....`);
+        });
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
 start()
-
-
-
-

@@ -1,8 +1,7 @@
 
 class CustomAPIError extends Error {
-    constructor(message, statusCode){
+    constructor(message){
         super(message)
-        this.statusCode = statusCode
     }
 }
 
@@ -19,8 +18,12 @@ class UnauthorizedError extends CustomAPIError {
         this.statusCode = 401
     }
 }
+const createCustomError = (msg, statusCode) => {
+    return new CustomAPIError(msg, statusCode)
+}
 
 module.exports = {
+    createCustomError, 
     CustomAPIError,
     BadRequestError,
     UnauthorizedError,

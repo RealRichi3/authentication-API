@@ -10,7 +10,7 @@ const status = new Schema ({
     role: {
         type: String,
         required: true,
-        enum: [ "SuperAdmin", "EndUser"]
+        enum: ["Admin", "EndUser"]
     },
     isActive: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },
