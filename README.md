@@ -953,4 +953,4 @@ URL: {{serverURL}}/auth/signup
 
 #
 
-Feedback and PR's are welcomed. Contact me on [Richie Moluno](https://twitter.com/MolunoRichie)
+Feedback and PR's are welcomed. Contact me on [Richie Moluno](https://twitter.com/MolunoRichie) molunorichie@gmail.com

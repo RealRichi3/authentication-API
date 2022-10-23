@@ -196,7 +196,6 @@ const login = asyncWrapper(async (req, res, next) => {
             });
     }
 
-    console.log(currAdmin)
     const match = await checkHash(password, currAdmin.password.password);
     if (!match) { throw new UnauthorizedError('Login credentials invalid') }
 
